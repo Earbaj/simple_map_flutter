@@ -10,16 +10,24 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late GoogleMapController map_controller;
-  final LatLng _center = const LatLng(23.810332, 90.4125181);
+  static LatLng _center = const LatLng(25.3412, 89.2752);
 
-  void onMapController(GoogleMapController controller){
+  Marker chatraMarker = Marker(
+    markerId: MarkerId("Chatra"),
+    position: _center,
+    infoWindow: InfoWindow(title: "Chatra Bazar"),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
+  );
+
+  void onMapController(GoogleMapController controller) {
     map_controller = controller;
   }
+
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
+        markers: {chatraMarker},
         onMapCreated: onMapController,
-        initialCameraPosition: CameraPosition(target: _center, zoom: 11.0)
-    );
+        initialCameraPosition: CameraPosition(target: _center, zoom: 11.0));
   }
 }
